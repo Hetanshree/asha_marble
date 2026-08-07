@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-gold: #C8A96E;
+  --color-gold-light: #DFC28A;
+  --color-gold-dark: #A8864E;
+  --color-cream: #F5F0E8;
+  --color-cream-dark: #E8E0D0;
+  --color-charcoal: #1C1A16;
+  --color-charcoal-light: #2E2B24;
+  --color-umber: #8B7355;
+  --color-limestone: #D4C9B0;
+
+  --font-display: "Cormorant Garant", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-fadeUp: fadeUp 0.7s ease forwards;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Reset ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ── Scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
+::selection { background: var(--color-gold); color: var(--color-charcoal); }
+
+/* ── Typography helpers ─────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ── Buttons ────────────────────────────── */
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px;
+  background: var(--color-gold);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid var(--color-gold);
+  transition: background 0.25s, border-color 0.25s;
+  cursor: pointer;
+}
+.btn-gold:hover { background: var(--color-gold-dark); border-color: var(--color-gold-dark); }
+
+.btn-outline-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.45);
+  transition: border-color 0.25s, color 0.25s;
+  cursor: pointer;
+}
+.btn-outline-light:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+.btn-outline-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px;
+  background: transparent;
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid var(--color-charcoal);
+  transition: background 0.25s, color 0.25s;
+  cursor: pointer;
+}
+.btn-outline-dark:hover { background: var(--color-charcoal); color: #fff; }
+
+/* ── Section label ──────────────────────── */
+.label {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--color-gold);
+}
+.label-with-line {
+  display: flex; align-items: center; gap: 12px;
+}
+.label-with-line::before {
+  content: ''; display: block;
+  width: 28px; height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+/* ── Gold divider ───────────────────────── */
+.gold-line {
+  width: 52px; height: 1px;
+  background: var(--color-gold);
+  margin: 20px 0;
+}
+
+/* ── Nav link underline ─────────────────── */
+.nav-link {
+  position: relative;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: ''; position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-gold);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* ── Product card ───────────────────────── */
+.product-card { transition: transform 0.35s cubic-bezier(.4,0,.2,1); }
+.product-card:hover { transform: translateY(-5px); }
+.product-card .card-img { overflow: hidden; }
+.product-card .card-img img { transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
+.product-card:hover .card-img img { transform: scale(1.06); }
+
+/* ── Hero slider ────────────────────────── */
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }
+.slide.active { opacity: 1; }
+
+/* ── Tab ────────────────────────────────── */
+.tab-btn {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 24px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  color: var(--color-umber);
+  cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
+}
+.tab-btn.active { color: var(--color-charcoal); border-bottom-color: var(--color-gold); }
+
+/* ── Sticky floating buttons ────────────── */
+.sticky-wa {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 52px; height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+.sticky-wa:hover { transform: scale(1.1); }
+
+/* ── Enquire popup ──────────────────────── */
+.enquire-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(28,26,22,0.7); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.enquire-box {
+  background: var(--color-cream);
+  width: 100%; max-width: 480px;
+  padding: 40px;
+  position: relative;
+}
+
+/* ── Reveal animation ───────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Reduce motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
