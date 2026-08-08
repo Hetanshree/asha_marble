@@ -138,7 +138,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           </div>
         )}
       </div>
-      <style>{`.detail-grid{grid-template-columns:1fr 1fr;}.form-row-2{grid-template-columns:1fr 1fr;}@media(max-width:768px){.detail-grid{grid-template-columns:1fr;}}@media(max-width:420px){.form-row-2{grid-template-columns:1fr;}}`}</style>
+      <style>{`.detail-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}.form-row-2{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}@media(max-width:768px){.detail-grid{grid-template-columns:minmax(0,1fr);}}@media(max-width:420px){.form-row-2{grid-template-columns:minmax(0,1fr);}}`}</style>
     </div>
   );
 }

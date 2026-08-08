@@ -99,9 +99,12 @@ a { text-decoration: none; color: inherit; }
   font-size: 10px; font-weight: 600;
   letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--color-gold);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 .label-with-line {
   display: flex; align-items: center; gap: 12px;
+  max-width: 100%;
 }
 .label-with-line::before {
   content: ''; display: block;

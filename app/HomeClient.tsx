@@ -217,8 +217,8 @@ function CompanySection() {
         </div>
       </div>
       <style>{`
-        .company-grid { grid-template-columns: 1fr 1fr; }
-        @media(max-width:768px){.company-grid{grid-template-columns:1fr;}}
+        .company-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+        @media(max-width:768px){.company-grid{grid-template-columns:minmax(0,1fr);}}
         .company-grid > div:first-child { min-height: 320px; }
       `}</style>
     </section>
@@ -310,7 +310,7 @@ function StatsSection() {
           </div>
         ))}
       </div>
-      <style>{`.stats-grid{grid-template-columns:repeat(4,1fr)!important;}@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;}}`}</style>
+      <style>{`.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;}@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}`}</style>
     </section>
   );
 }
@@ -395,7 +395,7 @@ function GallerySection() {
           ))}
         </div>
       </div>
-      <style>{`.gallery-grid{grid-template-columns:repeat(4,1fr);}@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}`}</style>
+      <style>{`.gallery-grid{grid-template-columns:repeat(4,minmax(0,1fr));}@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}`}</style>
     </section>
   );
 }

@@ -145,11 +145,11 @@ export default async function AboutPage() {
           ))}
         </div>
         <style>{`
-          .two-col{grid-template-columns:1fr 1fr;}
-          .stats-4{grid-template-columns:repeat(3,1fr);}
+          .two-col{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+          .stats-4{grid-template-columns:repeat(3,minmax(0,1fr));}
           @media(max-width:768px){
-            .two-col{grid-template-columns:1fr; gap:40px !important;}
-            .stats-4{grid-template-columns:repeat(2,1fr)!important;}
+            .two-col{grid-template-columns:minmax(0,1fr); gap:40px !important;}
+            .stats-4{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
             .about-section{padding-top:56px !important; padding-bottom:56px !important;}
             .exp-badge{left:0 !important; bottom:-16px !important; padding:16px 20px !important;}
             .exp-badge > div:first-child{font-size:32px !important;}
