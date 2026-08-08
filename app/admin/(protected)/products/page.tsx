@@ -81,7 +81,8 @@ export default function ProductsListPage() {
         ) : products.length === 0 ? (
           <p className="p-6 text-sm text-neutral-500">No products found.</p>
         ) : (
-          <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-left text-sm">
             <thead className="border-b border-neutral-200 text-xs uppercase tracking-wide text-neutral-500">
               <tr>
                 <th className="px-4 py-3">Product</th>
@@ -126,6 +127,7 @@ export default function ProductsListPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </Card>
 

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, Globe, Package, Users, CheckCircle } from "lucide-react";
-import { SITE } from "@/lib/data";
 import { getAbout } from "@/server/services/about.service";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +25,7 @@ export default async function AboutPage() {
       <div style={{ position: "relative", height: 380, overflow: "hidden" }}>
         <Image src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=1600&q=80" alt="Jaisalmer stone quarry" fill className="object-cover" unoptimized priority />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(28,26,22,0.85) 50%, rgba(28,26,22,0.5))" }} />
-        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", maxWidth: 1280, margin: "0 auto", padding: "0 24px 48px", width: "100%" }}>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", maxWidth: 1440, margin: "0 auto", padding: "0 24px 48px", width: "100%" }}>
           <div style={{ display: "flex", gap: 8, fontSize: 11, color: "rgba(212,201,176,0.5)", marginBottom: 16, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             <Link href="/" style={{ color: "inherit" }}>Home</Link><span>/</span>
             <span style={{ color: "var(--color-limestone)" }}>About Us</span>
@@ -36,8 +35,8 @@ export default async function AboutPage() {
       </div>
 
       {/* Intro */}
-      <section style={{ padding: "96px 0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="two-col">
+      <section className="about-section" style={{ padding: "96px 0" }}>
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 24px", display: "grid", gap: 80, alignItems: "center" }} className="two-col">
           <div>
             <div className="label-with-line" style={{ marginBottom: 16 }}><span className="label">About Asha Marble</span></div>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,3.5vw,52px)", fontWeight: 300, color: "var(--color-charcoal)", lineHeight: 1.15, marginBottom: 20 }}>
@@ -55,7 +54,7 @@ export default async function AboutPage() {
           <div style={{ position: "relative" }}>
             <Image src={image} alt="Jaisalmer Yellow Marble" width={700} height={520} className="object-cover" style={{ width: "100%", height: "auto" }} unoptimized />
             {experience && (
-              <div style={{ position: "absolute", bottom: -20, left: -20, background: "var(--color-gold)", padding: "24px 28px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
+              <div className="exp-badge" style={{ position: "absolute", bottom: -20, left: -20, background: "var(--color-gold)", padding: "24px 28px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 48, fontWeight: 300, color: "var(--color-charcoal)", lineHeight: 1 }}>{experience}</div>
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-charcoal)", marginTop: 6 }}>Years of Excellence</div>
               </div>
@@ -65,8 +64,8 @@ export default async function AboutPage() {
       </section>
 
       {/* Roles */}
-      <section style={{ background: "var(--color-charcoal)", padding: "80px 0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
+      <section className="about-section" style={{ background: "var(--color-charcoal)", padding: "80px 0" }}>
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div className="label-with-line" style={{ justifyContent: "center", marginBottom: 12 }}><span className="label">Our Role</span></div>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,3.5vw,48px)", fontWeight: 300, color: "#fff" }}>
@@ -91,8 +90,8 @@ export default async function AboutPage() {
       </section>
 
       {/* Specialization */}
-      <section style={{ padding: "96px 0", background: "var(--color-cream-dark)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="two-col">
+      <section className="about-section" style={{ padding: "96px 0", background: "var(--color-cream-dark)" }}>
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 24px", display: "grid", gap: 80, alignItems: "center" }} className="two-col">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             {[
               "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=75",
@@ -132,21 +131,30 @@ export default async function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section style={{ background: "var(--color-charcoal)", padding: "64px 0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0 }} className="stats-4">
+      <section className="about-section" style={{ background: "var(--color-charcoal)", padding: "64px 0" }}>
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 24px", display: "grid", gap: 0 }} className="stats-4">
           {[
             { n: experience || "—", label: "Years in Business" },
             { n: "500+", label: "Projects Delivered" },
-            { n: SITE.rating + "★", label: "Google Rating" },
             { n: "12+", label: "States Served" },
-          ].map((s, i) => (
-            <div key={s.label} style={{ textAlign: "center", padding: "16px", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+          ].map((s, i, arr) => (
+            <div key={s.label} style={{ textAlign: "center", padding: "16px", borderRight: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
               <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,64px)", fontWeight: 300, color: "var(--color-gold)" }}>{s.n}</div>
               <div style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(212,201,176,0.5)", marginTop: 6 }}>{s.label}</div>
             </div>
           ))}
         </div>
-        <style>{`.two-col{grid-template-columns:1fr 1fr;}@media(max-width:768px){.two-col{grid-template-columns:1fr;}.stats-4{grid-template-columns:repeat(2,1fr)!important;}}`}</style>
+        <style>{`
+          .two-col{grid-template-columns:1fr 1fr;}
+          .stats-4{grid-template-columns:repeat(3,1fr);}
+          @media(max-width:768px){
+            .two-col{grid-template-columns:1fr; gap:40px !important;}
+            .stats-4{grid-template-columns:repeat(2,1fr)!important;}
+            .about-section{padding-top:56px !important; padding-bottom:56px !important;}
+            .exp-badge{left:0 !important; bottom:-16px !important; padding:16px 20px !important;}
+            .exp-badge > div:first-child{font-size:32px !important;}
+          }
+        `}</style>
       </section>
     </div>
   );

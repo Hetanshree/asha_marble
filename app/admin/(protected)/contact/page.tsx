@@ -149,14 +149,14 @@ export default function ContactPage() {
           </div>
           <div className="flex flex-col gap-3">
             {contact.businessHours.map((hour, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <div key={index} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <Input
                   placeholder="e.g. Monday – Saturday"
                   value={hour.days}
                   onChange={(e) => updateHour(index, "days", e.target.value)}
                 />
                 <Input placeholder="e.g. 9:00 AM – 7:00 PM" value={hour.time} onChange={(e) => updateHour(index, "time", e.target.value)} />
-                <Button type="button" variant="danger" onClick={() => removeHour(index)}>
+                <Button type="button" variant="danger" onClick={() => removeHour(index)} className="shrink-0">
                   Remove
                 </Button>
               </div>

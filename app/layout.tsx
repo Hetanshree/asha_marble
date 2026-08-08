@@ -3,7 +3,6 @@ import "./globals.css";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "./components/Navbar";
-import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import EnquireModal from "./components/EnquireModal";
 import { SITE } from "@/lib/data";
@@ -30,9 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
-        {!isAdmin && <TopBar onEnquire={() => setEnquireOpen(true)} />}
         {!isAdmin && <Navbar onEnquire={() => setEnquireOpen(true)} />}
-        <main style={isAdmin ? undefined : { paddingTop: 108 }}>
+        <main style={isAdmin ? undefined : { paddingTop: 68 }}>
           {children}
         </main>
         {!isAdmin && <Footer />}

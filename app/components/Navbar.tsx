@@ -15,28 +15,26 @@ const NAV = [
 ];
 
 export default function Navbar({ onEnquire }: { onEnquire: () => void }) {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const scrolled = scrollY > 80;
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 80);
+    const fn = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const navBg = isHome
-    ? scrolled ? "rgba(28,26,22,0.97)" : "transparent"
-    : "var(--color-charcoal)";
-  const navBorder = scrolled || !isHome ? "1px solid rgba(255,255,255,0.08)" : "none";
+  const navBg = scrolled ? "rgba(28,26,22,0.97)" : "var(--color-charcoal)";
+  const navBorder = "1px solid rgba(255,255,255,0.08)";
 
   return (
     <header style={{
-      position: "fixed", top: scrolled ? 0 : 40, left: 0, right: 0, zIndex: 100,
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
       background: navBg, backdropFilter: scrolled ? "blur(10px)" : "none",
       borderBottom: navBorder,
-      transition: "background 0.4s, backdrop-filter 0.4s, top 0.3s",
+      transition: "background 0.4s, backdrop-filter 0.4s",
     }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
         {/* Logo */}
@@ -79,9 +77,9 @@ export default function Navbar({ onEnquire }: { onEnquire: () => void }) {
             onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#25D366"; }}>
             WhatsApp
           </a>
-          <button onClick={onEnquire} className="btn-gold" style={{ padding: "9px 20px", fontSize: 10 }}>
+          {/* <button onClick={onEnquire} className="btn-gold" style={{ padding: "9px 20px", fontSize: 10 }}>
             Get Quote
-          </button>
+          </button> */}
         </div>
 
         {/* Mobile hamburger */}

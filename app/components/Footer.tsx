@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, ExternalLink, ArrowUp } from "lucide-react";
 import { SITE } from "@/lib/data";
 
 type ContactAddress = { label: string; address: string };
@@ -52,10 +52,6 @@ export default function Footer() {
           <p style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(212,201,176,0.7)", maxWidth: 260, marginBottom: 20 }}>
             Manufacturer, supplier, wholesaler &amp; exporter of premium Jaisalmer Yellow Marble and natural stone products since {SITE.founded}.
           </p>
-          <div style={{ display: "flex", gap: 8 }}>
-            {[1,2,3,4,5].map(s => <span key={s} style={{ color: "var(--color-gold)", fontSize: 14 }}>★</span>)}
-            <span style={{ fontSize: 11, color: "rgba(212,201,176,0.5)", marginLeft: 4 }}>{SITE.rating} · {SITE.reviews}+ Reviews</span>
-          </div>
         </div>
 
         {/* Quick Links */}
@@ -119,9 +115,23 @@ export default function Footer() {
         <p style={{ fontSize: 11, color: "rgba(212,201,176,0.4)" }}>
           © {year} Asha Marble &amp; Art Work. All rights reserved.
         </p>
-        <p style={{ fontSize: 11, color: "rgba(212,201,176,0.4)" }}>
-          Ahmedabad, Gujarat · India
-        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <p style={{ fontSize: 11, color: "rgba(212,201,176,0.4)" }}>
+            Ahmedabad, Gujarat · India
+          </p>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            style={{
+              display: "flex", alignItems: "center", gap: 6,
+              background: "none", border: "1px solid rgba(212,201,176,0.25)",
+              color: "var(--color-limestone)", fontSize: 10, fontWeight: 600,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              padding: "6px 12px", cursor: "pointer", transition: "border-color 0.2s, color 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--color-gold)"; e.currentTarget.style.color = "var(--color-gold)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(212,201,176,0.25)"; e.currentTarget.style.color = "var(--color-limestone)"; }}>
+            <ArrowUp size={12} /> Back to Top
+          </button>
+        </div>
       </div>
     </footer>
   );

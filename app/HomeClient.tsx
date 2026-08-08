@@ -80,7 +80,7 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
   const slide = slides[cur];
 
   return (
-    <section style={{ position: "relative", height: "calc(100vh - 108px)", minHeight: 580, overflow: "hidden", background: "var(--color-charcoal)" }}>
+    <section style={{ position: "relative", minHeight: "max(580px, calc(100vh - 68px))", overflow: "hidden", background: "var(--color-charcoal)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       {/* Bg images */}
       {slides.map((s, i) => (
         <div key={i} style={{
@@ -94,14 +94,14 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
       ))}
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+      <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1280, margin: "0 auto", padding: "40px 0" }} className="hero-content">
         <div className="label-with-line" style={{ marginBottom: 20 }}>
           <span className="label">{slide.eyebrow}</span>
         </div>
         <h1 style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(48px, 7vw, 96px)",
-          fontWeight: 300, color: "#fff", lineHeight: 1.05,
-          marginBottom: 24, maxWidth: 700,
+          fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5.5vw, 80px)",
+          fontWeight: 300, color: "#fff", lineHeight: 1.15,
+          marginBottom: 24, marginTop: 4, maxWidth: 900,
           whiteSpace: "pre-line",
         }}>
           {slide.headline}
@@ -120,19 +120,11 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
             <Phone size={14} /> {phone}
           </a>
         </div>
-
-        {/* Google rating */}
-        <div style={{ marginTop: 48, display: "inline-flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)", padding: "10px 18px" }}>
-          <div style={{ display: "flex", gap: 2 }}>
-            {[1,2,3,4,5].map(s => <Star key={s} size={13} fill="var(--color-gold)" color="var(--color-gold)" />)}
-          </div>
-          <span style={{ color: "#fff", fontSize: 12, fontWeight: 500 }}>{SITE.rating} · {SITE.reviews}+ Google Reviews</span>
-        </div>
       </div>
 
       {/* Slide counter + nav */}
       {total > 1 && (
-        <div style={{ position: "absolute", bottom: 32, right: 48, zIndex: 3, display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ position: "absolute", bottom: 32, zIndex: 3, display: "flex", alignItems: "center", gap: 16 }} className="hero-nav-controls">
           <button onClick={() => go(cur - 1)} style={{ width: 40, height: 40, border: "1px solid rgba(255,255,255,0.3)", background: "transparent", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color 0.2s" }}
             onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--color-gold)")}
             onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}>
@@ -157,6 +149,14 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
           ))}
         </div>
       )}
+      <style>{`
+        .hero-content { padding: 0 48px; }
+        .hero-nav-controls { right: 48px; }
+        @media (max-width: 640px) {
+          .hero-content { padding: 0 20px; }
+          .hero-nav-controls { right: 20px; bottom: 20px; }
+        }
+      `}</style>
     </section>
   );
 }
@@ -182,7 +182,7 @@ function CompanySection() {
   const { ref, vis } = useReveal();
   return (
     <section ref={ref} style={{ background: "var(--color-charcoal)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1fr 1fr" }} className="company-grid">
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid" }} className="company-grid">
         {/* Image */}
         <div style={{ position: "relative", minHeight: 500 }}>
           <Image src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Jaisalmer Yellow Marble quarry" fill className="object-cover" unoptimized />
@@ -204,7 +204,7 @@ function CompanySection() {
             Today, operating as manufacturer, supplier, wholesaler, and exporter, we combine ancient Rajasthani stone-crafting traditions with modern processing and a nationwide distribution network.
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 36 }}>
-            {[["Manufacturer", "Direct from Jaisalmer quarries"], ["Wholesaler", "Bulk pricing for contractors"], ["Exporter", "UAE, UK, USA & beyond"], ["5.0★ Rating", `${SITE.reviews}+ verified reviews`]].map(([t, d]) => (
+            {[["Manufacturer", "Direct from Jaisalmer quarries"], ["Wholesaler", "Bulk pricing for contractors"], ["Exporter", "UAE, UK, USA & beyond"], [`${SITE.rating}★ Rating`, `${SITE.reviews}+ verified reviews`]].map(([t, d]) => (
               <div key={t}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, color: "var(--color-gold)", marginBottom: 4 }}>{t}</div>
                 <div style={{ fontSize: 11, color: "rgba(212,201,176,0.55)", letterSpacing: "0.04em" }}>{d}</div>
@@ -297,7 +297,7 @@ function StatsSection() {
   ];
   return (
     <section style={{ background: "var(--color-charcoal)", padding: "64px 0", borderTop: "1px solid rgba(200,169,110,0.15)", borderBottom: "1px solid rgba(200,169,110,0.15)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0 }} className="stats-grid">
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gap: 0 }} className="stats-grid">
         {stats.map((s, i) => (
           <div key={s.label} style={{
             textAlign: "center", padding: "8px 16px",

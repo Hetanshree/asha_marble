@@ -6,6 +6,7 @@ import { getProductByIdOrSlug, listProducts } from "@/server/services/product.se
 import { getContact } from "@/server/services/contact.service";
 import { productListQuerySchema } from "@/server/validation/product.validation";
 import { ApiError } from "@/server/utils/ApiError";
+import ProductGallery from "./ProductGallery";
 
 export const dynamic = "force-dynamic";
 
@@ -59,22 +60,9 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
       </div>
 
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, marginBottom: 80 }} className="detail-grid">
+        <div style={{ display: "grid", gap: 64, marginBottom: 80 }} className="detail-grid">
           {/* Images */}
-          <div>
-            <div style={{ aspectRatio: "4/3", position: "relative", marginBottom: 12, overflow: "hidden" }}>
-              <Image src={p.images[0]} alt={p.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
-            </div>
-            {p.images.length > 1 && (
-              <div style={{ display: "grid", gridTemplateColumns: `repeat(${p.images.length}, 1fr)`, gap: 8 }}>
-                {p.images.map((img, i) => (
-                  <div key={i} style={{ aspectRatio: "1/1", position: "relative", border: "2px solid var(--color-limestone)", overflow: "hidden" }}>
-                    <Image src={img} alt={`${p.name} ${i + 1}`} fill className="object-cover" sizes="120px" />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductGallery images={p.images} name={p.name} />
 
           {/* Info */}
           <div>
@@ -98,7 +86,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             <p style={{ fontSize: 14, color: "var(--color-charcoal)", lineHeight: 1.9, marginBottom: 24 }}>{p.description}</p>
 
             {/* Features */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 32 }}>
+            <div style={{ display: "grid", gap: 10, marginBottom: 32 }} className="form-row-2">
               {["Premium Quality Stone", "Direct from Quarry", "Custom Sizes Available", "PAN India Delivery", "Export Available", "Bulk Orders Welcome"].map(f => (
                 <div key={f} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <CheckCircle size={13} color="var(--color-gold)" style={{ flexShrink: 0 }} />
@@ -150,7 +138,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           </div>
         )}
       </div>
-      <style>{`.detail-grid{grid-template-columns:1fr 1fr;}@media(max-width:768px){.detail-grid{grid-template-columns:1fr;}}`}</style>
+      <style>{`.detail-grid{grid-template-columns:1fr 1fr;}.form-row-2{grid-template-columns:1fr 1fr;}@media(max-width:768px){.detail-grid{grid-template-columns:1fr;}}@media(max-width:420px){.form-row-2{grid-template-columns:1fr;}}`}</style>
     </div>
   );
 }

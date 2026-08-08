@@ -253,8 +253,11 @@ export const SITE = {
     { days: "Monday – Saturday", time: "9:00 AM – 7:00 PM" },
     { days: "Sunday", time: "10:00 AM – 4:00 PM" },
   ],
-  rating: "5.0",
-  reviews: "48",
+  // Real values from the Asha Stone Google Business listing:
+  // https://share.google/ZAwPhRrL7K2HHhym2 (checked manually — update here if it changes,
+  // or set up live Google Places API sync for automatic updates)
+  rating: "4.8",
+  reviews: "11",
   founded: "2005",
 };
 

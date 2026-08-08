@@ -40,7 +40,7 @@ function ProductsContent({ products, categories }: { products: ProductListItem[]
             <span style={{ color: "var(--color-limestone)" }}>Products</span>
           </div>
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,72px)", fontWeight: 300, color: "#fff", marginBottom: 12 }}>
-            Stone Collection
+            Marble, Sandstone &amp; Stone
           </h1>
           <p style={{ color: "rgba(212,201,176,0.6)", fontSize: 14, maxWidth: 520 }}>
             Premium Jaisalmer Yellow Marble, sandstone, natural stone, carved work, and wall cladding solutions.
