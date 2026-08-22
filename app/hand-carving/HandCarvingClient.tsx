@@ -14,6 +14,7 @@ import {
   Sparkles,
   ImageOff,
 } from "lucide-react";
+import { formatPrice } from "@/lib/data";
 
 /* ─── Types ──────────────────────────────────────── */
 type Highlight = { title: string; description: string };
@@ -322,7 +323,7 @@ function ProductsSection({ products, whatsapp }: { products: ProductItem[]; what
                     </p>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--color-limestone)", paddingTop: 14, marginBottom: 14 }}>
                       <div>
-                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 500, color: "var(--color-gold)" }}>{p.price}</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 500, color: "var(--color-gold)", fontVariantNumeric: "lining-nums" }}>{formatPrice(p.price)}</span>
                         {p.price !== "On Request" && <span style={{ fontSize: 11, color: "var(--color-umber)", marginLeft: 4 }}>{p.unit}</span>}
                       </div>
                       <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 8px", background: av.bg, color: av.color, border: `1px solid ${av.border}` }}>
@@ -368,7 +369,7 @@ function ProductsSection({ products, whatsapp }: { products: ProductItem[]; what
                 <div className="label-with-line" style={{ marginBottom: 10 }}><span className="label">{active.category}</span></div>
                 <h3 style={{ fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 400, color: "var(--color-charcoal)", marginBottom: 12, lineHeight: 1.15 }}>{active.name}</h3>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 400, color: "var(--color-gold)" }}>{active.price}</span>
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 400, color: "var(--color-gold)", fontVariantNumeric: "lining-nums" }}>{formatPrice(active.price)}</span>
                   {active.price !== "On Request" && <span style={{ fontSize: 12, color: "var(--color-umber)" }}>{active.unit}</span>}
                 </div>
                 <p style={{ fontSize: 13, color: "var(--color-charcoal)", lineHeight: 1.8, marginBottom: 20 }}>{active.description || active.shortDescription}</p>
@@ -386,7 +387,7 @@ function ProductsSection({ products, whatsapp }: { products: ProductItem[]; what
                     </div>
                   )}
                 </div>
-                <a href={`https://wa.me/${whatsapp}?text=Hi, I am interested in ${active.name} (${active.price} ${active.unit}). Please share details.`}
+                <a href={`https://wa.me/${whatsapp}?text=Hi, I am interested in ${active.name} (${formatPrice(active.price)} ${active.unit}). Please share details.`}
                   target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ width: "100%", justifyContent: "center" }}>
                   <MessageCircle size={14} /> WhatsApp Enquiry
                 </a>

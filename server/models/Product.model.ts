@@ -14,6 +14,7 @@ const ProductSchema = new Schema(
     availability: { type: String, enum: ["available", "limited", "on-request"], default: "available" },
     featured: { type: Boolean, default: false },
     active: { type: Boolean, default: true },
+    order: { type: Number, default: 0 },
     seoTitle: { type: String, trim: true, default: "" },
     seoDescription: { type: String, trim: true, default: "" },
   },
@@ -23,6 +24,7 @@ const ProductSchema = new Schema(
 ProductSchema.index({ category: 1 });
 ProductSchema.index({ featured: 1 });
 ProductSchema.index({ active: 1 });
+ProductSchema.index({ order: 1 });
 ProductSchema.index({ name: "text", shortDescription: "text", description: "text" });
 
 export type ProductDoc = InferSchemaType<typeof ProductSchema>;

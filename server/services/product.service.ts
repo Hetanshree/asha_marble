@@ -41,7 +41,7 @@ export async function listProducts(
   const skip = (query.page - 1) * query.limit;
 
   const [items, total] = await Promise.all([
-    ProductModel.find(filter).sort({ createdAt: -1 }).skip(skip).limit(query.limit).lean(),
+    ProductModel.find(filter).sort({ order: 1, createdAt: -1 }).skip(skip).limit(query.limit).lean(),
     ProductModel.countDocuments(filter),
   ]);
 
@@ -68,7 +68,14 @@ export async function createProduct(input: CreateProductInput) {
   await dbConnect();
 
   const slug = await generateUniqueSlug(input.name, input.slug);
-  const product = await ProductModel.create({ ...input, slug });
+
+  let order = input.order;
+  if (order === undefined) {
+    const last = await ProductModel.findOne().sort({ order: -1 }).lean();
+    order = last ? last.order + 1 : 0;
+  }
+
+  const product = await ProductModel.create({ ...input, slug, order });
   return product.toObject();
 }
 
@@ -96,6 +103,17 @@ export async function deleteProduct(id: string): Promise<void> {
 
   await deleteImagesByPublicIds(product.cloudinaryPublicIds);
   await product.deleteOne();
+}
+
+export async function reorderProducts(ids: string[]) {
+  await dbConnect();
+
+  const bulkOps = ids.map((id, index) => ({
+    updateOne: { filter: { _id: id }, update: { $set: { order: index } } },
+  }));
+  if (bulkOps.length > 0) await ProductModel.bulkWrite(bulkOps);
+
+  return ProductModel.find({}).sort({ order: 1, createdAt: -1 }).lean();
 }
 
 export async function removeProductImage(id: string, publicId: string) {

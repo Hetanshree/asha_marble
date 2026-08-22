@@ -1,3 +1,10 @@
+/** Appends the "Rs" currency marker after a numeric price (e.g. "95" -> "95 Rs").
+ *  Uses a non-breaking space so the number and "Rs" never wrap onto separate
+ *  lines. Leaves non-numeric prices (e.g. "On Request") untouched. */
+export function formatPrice(price: string): string {
+  return /^[\d,.]+$/.test(price.trim()) ? `${price} Rs` : price;
+}
+
 export type Product = {
   id: string;
   name: string;

@@ -6,6 +6,7 @@ import { getProductByIdOrSlug, listProducts } from "@/server/services/product.se
 import { getContact } from "@/server/services/contact.service";
 import { productListQuerySchema } from "@/server/validation/product.validation";
 import { ApiError } from "@/server/utils/ApiError";
+import { formatPrice } from "@/lib/data";
 import ProductGallery from "./ProductGallery";
 
 export const dynamic = "force-dynamic";
@@ -73,7 +74,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
 
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
               <div>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 300, color: "var(--color-gold)" }}>{p.price}</span>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 300, color: "var(--color-gold)", fontVariantNumeric: "lining-nums" }}>{formatPrice(p.price)}</span>
                 {p.price !== "On Request" && <span style={{ fontSize: 13, color: "var(--color-umber)", marginLeft: 6 }}>{p.unit}</span>}
               </div>
               <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", padding: "6px 12px", background: av.bg, color: av.color, border: `1px solid ${av.border}` }}>
@@ -97,7 +98,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
 
             {/* CTA */}
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href={`https://wa.me/${whatsapp}?text=Hi, I am interested in ${p.name} (${p.price} ${p.unit}). Please share details.`}
+              <a href={`https://wa.me/${whatsapp}?text=Hi, I am interested in ${p.name} (${formatPrice(p.price)} ${p.unit}). Please share details.`}
                 target="_blank" rel="noopener noreferrer"
                 className="btn-gold" style={{ flex: 1, justifyContent: "center", minWidth: 180 }}>
                 <MessageCircle size={14} /> WhatsApp Enquiry
@@ -128,7 +129,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                   <div style={{ padding: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <div style={{ fontFamily: "var(--font-display)", fontSize: 17, fontWeight: 500, color: "var(--color-charcoal)" }}>{rp.name}</div>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: 16, color: "var(--color-gold)", marginTop: 4 }}>{rp.price}</div>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 16, color: "var(--color-gold)", marginTop: 4, fontVariantNumeric: "lining-nums" }}>{formatPrice(rp.price)}</div>
                     </div>
                     <ArrowRight size={14} color="var(--color-gold)" />
                   </div>

@@ -3,6 +3,7 @@ import {
   createProductSchema,
   deleteImageSchema,
   productListQuerySchema,
+  reorderProductsSchema,
   updateProductSchema,
 } from "../validation/product.validation";
 import {
@@ -11,6 +12,7 @@ import {
   getProductByIdOrSlug,
   listProducts,
   removeProductImage,
+  reorderProducts,
   updateProduct,
 } from "../services/product.service";
 import { requireAdmin, optionalAdmin } from "../middleware/auth.middleware";
@@ -57,6 +59,15 @@ export async function deleteProductController(request: NextRequest, context: { p
 
   await deleteProduct(id);
   return apiSuccess(null, "Product deleted successfully");
+}
+
+export async function reorderProductsController(request: NextRequest) {
+  await requireAdmin();
+  const body = await request.json();
+  const { ids } = reorderProductsSchema.parse(body);
+
+  const items = await reorderProducts(ids);
+  return apiSuccess(items, "Product order updated successfully");
 }
 
 export async function deleteProductImageController(

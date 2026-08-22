@@ -19,6 +19,7 @@ export const createProductSchema = z
     availability: availabilitySchema.default("available"),
     featured: z.boolean().default(false),
     active: z.boolean().default(true),
+    order: z.number().int().optional(),
     seoTitle: z.string().trim().optional().default(""),
     seoDescription: z.string().trim().optional().default(""),
   })
@@ -41,6 +42,7 @@ export const updateProductSchema = z
     availability: availabilitySchema.optional(),
     featured: z.boolean().optional(),
     active: z.boolean().optional(),
+    order: z.number().int().optional(),
     seoTitle: z.string().trim().optional(),
     seoDescription: z.string().trim().optional(),
   })
@@ -71,6 +73,11 @@ export const deleteImageSchema = z.object({
   publicId: z.string().min(1, "publicId is required"),
 });
 
+export const reorderProductsSchema = z.object({
+  ids: z.array(z.string().min(1)).min(1, "At least one product id is required"),
+});
+
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
 export type ProductListQuery = z.infer<typeof productListQuerySchema>;
+export type ReorderProductsInput = z.infer<typeof reorderProductsSchema>;

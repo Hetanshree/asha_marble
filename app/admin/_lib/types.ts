@@ -23,6 +23,7 @@ export type Product = {
   availability: Availability;
   featured: boolean;
   active: boolean;
+  order: number;
   seoTitle: string;
   seoDescription: string;
   createdAt: string;

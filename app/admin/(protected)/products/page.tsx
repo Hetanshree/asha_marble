@@ -12,10 +12,11 @@ export default function ProductsListPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [reordering, setReordering] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams({ page: String(page), limit: "20" });
+    const params = new URLSearchParams({ page: String(page), limit: "100" });
     if (search) params.set("search", search);
 
     api
@@ -28,6 +29,16 @@ export default function ProductsListPage() {
       .catch((err) => setError(err instanceof ApiRequestError ? err.message : "Failed to load products"))
       .finally(() => setLoading(false));
   }, [page, search]);
+
+  function refetch() {
+    const params = new URLSearchParams({ page: String(page), limit: "100" });
+    if (search) params.set("search", search);
+
+    api
+      .get<Product[]>(`/api/products?${params.toString()}`)
+      .then((res) => setProducts(res.data))
+      .catch(() => undefined);
+  }
 
   async function toggleActive(product: Product) {
     try {
@@ -45,6 +56,26 @@ export default function ProductsListPage() {
       setProducts((prev) => prev.filter((p) => p._id !== product._id));
     } catch (err) {
       setError(err instanceof ApiRequestError ? err.message : "Failed to delete product");
+    }
+  }
+
+  async function move(index: number, direction: -1 | 1) {
+    const target = index + direction;
+    if (target < 0 || target >= products.length) return;
+
+    const next = [...products];
+    [next[index], next[target]] = [next[target], next[index]];
+    setProducts(next);
+
+    setReordering(true);
+    try {
+      await api.put("/api/products/reorder", { ids: next.map((p) => p._id) });
+      setError(null);
+    } catch (err) {
+      setError(err instanceof ApiRequestError ? err.message : "Failed to reorder products");
+      refetch();
+    } finally {
+      setReordering(false);
     }
   }
 
@@ -73,6 +104,10 @@ export default function ProductsListPage() {
 
       {error && <Banner kind="error" message={error} />}
 
+      {search && (
+        <p className="mb-2 text-xs text-neutral-500">Clear the search to reorder products.</p>
+      )}
+
       <Card className="mt-4 p-0">
         {loading ? (
           <div className="flex justify-center py-16">
@@ -82,9 +117,10 @@ export default function ProductsListPage() {
           <p className="p-6 text-sm text-neutral-500">No products found.</p>
         ) : (
           <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] text-left text-sm">
+          <table className="w-full min-w-[760px] text-left text-sm">
             <thead className="border-b border-neutral-200 text-xs uppercase tracking-wide text-neutral-500">
               <tr>
+                <th className="px-4 py-3">Order</th>
                 <th className="px-4 py-3">Product</th>
                 <th className="px-4 py-3">Category</th>
                 <th className="px-4 py-3">Price</th>
@@ -94,8 +130,30 @@ export default function ProductsListPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <tr key={product._id}>
+                  <td className="px-4 py-3">
+                    <div className="flex flex-col gap-0.5">
+                      <button
+                        type="button"
+                        onClick={() => move(index, -1)}
+                        disabled={!!search || index === 0 || reordering}
+                        aria-label="Move up"
+                        className="rounded text-neutral-400 hover:text-neutral-800 disabled:opacity-30"
+                      >
+                        ▲
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => move(index, 1)}
+                        disabled={!!search || index === products.length - 1 || reordering}
+                        aria-label="Move down"
+                        className="rounded text-neutral-400 hover:text-neutral-800 disabled:opacity-30"
+                      >
+                        ▼
+                      </button>
+                    </div>
+                  </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       {product.images[0] && (

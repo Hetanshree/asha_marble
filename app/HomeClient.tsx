@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Phone, MessageCircle, Star, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
-import { SITE, CATEGORIES, TESTIMONIALS, GALLERY_IMAGES, FAQS } from "@/lib/data";
+import { SITE, CATEGORIES, TESTIMONIALS, GALLERY_IMAGES, FAQS, formatPrice } from "@/lib/data";
 
 export type HeroSlideData = {
   eyebrow: string;
@@ -345,11 +345,11 @@ function FeaturedProducts({ featured }: { featured: FeaturedProductData[] }) {
             <Link key={p._id} href={`/products/${p.slug}`}
               className="product-card"
               style={{
-                display: "block", background: "#fff", border: "1px solid var(--color-limestone)",
+                display: "flex", flexDirection: "column", height: "100%", background: "#fff", border: "1px solid var(--color-limestone)",
                 opacity: vis ? 1 : 0, transform: vis ? "none" : "translateY(24px)",
                 transition: `opacity 0.6s ${i * 90}ms, transform 0.6s ${i * 90}ms`,
               }}>
-              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative", background: "var(--color-cream-dark)" }}>
+              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative", background: "var(--color-cream-dark)", flexShrink: 0 }}>
                 <Image src={p.images[0]} alt={p.name} fill className="object-contain" unoptimized />
                 {/* Category badge */}
                 <div style={{ position: "absolute", top: 12, left: 12, background: "rgba(28,26,22,0.82)", backdropFilter: "blur(4px)", padding: "4px 10px" }}>
@@ -361,14 +361,14 @@ function FeaturedProducts({ featured }: { featured: FeaturedProductData[] }) {
                   </div>
                 )}
               </div>
-              <div style={{ padding: "20px" }}>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 500, color: "var(--color-charcoal)", marginBottom: 6 }}>{p.name}</h3>
-                <p style={{ fontSize: 12, color: "var(--color-umber)", lineHeight: 1.6, marginBottom: 14, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+              <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 500, color: "var(--color-charcoal)", marginBottom: 6, lineHeight: 1.25, minHeight: "2.5em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.name}</h3>
+                <p style={{ fontSize: 12, color: "var(--color-umber)", lineHeight: 1.6, marginBottom: 14, minHeight: "3.2em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
                   {p.shortDescription}
                 </p>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid var(--color-limestone)", paddingTop: 14 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid var(--color-limestone)", paddingTop: 14, marginTop: "auto" }}>
                   <div>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, color: "var(--color-gold)" }}>{p.price}</span>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, color: "var(--color-gold)", fontVariantNumeric: "lining-nums" }}>{formatPrice(p.price)}</span>
                     {p.price !== "On Request" && <span style={{ fontSize: 11, color: "var(--color-umber)", marginLeft: 4 }}>{p.unit}</span>}
                   </div>
                   <ArrowRight size={14} color="var(--color-gold)" />
