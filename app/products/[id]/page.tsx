@@ -118,12 +118,12 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 300, color: "var(--color-charcoal)", marginBottom: 32 }}>
               Related Products
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px,1fr))", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(240px,100%),1fr))", gap: 20 }}>
               {related.map(rp => (
                 <Link key={String(rp._id)} href={`/products/${rp.slug}`} className="product-card"
                   style={{ display: "block", background: "#fff", border: "1px solid var(--color-limestone)" }}>
-                  <div className="card-img" style={{ aspectRatio: "4/3", position: "relative" }}>
-                    <Image src={rp.images[0]} alt={rp.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 240px" />
+                  <div className="card-img" style={{ aspectRatio: "4/3", position: "relative", background: "var(--color-cream-dark)" }}>
+                    <Image src={rp.images[0]} alt={rp.name} fill className="object-contain" sizes="(max-width: 768px) 100vw, 240px" />
                   </div>
                   <div style={{ padding: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>

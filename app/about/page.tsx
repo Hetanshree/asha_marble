@@ -10,7 +10,7 @@ export const metadata = {
   description: "Learn about Asha Marble & Art Work — leading manufacturer, supplier and exporter of Jaisalmer Yellow Marble and natural stone from Ahmedabad, Gujarat since 2005.",
 };
 
-const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";
+const DEFAULT_IMAGE = "https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png";
 
 export default async function AboutPage() {
   const about = await getAbout();

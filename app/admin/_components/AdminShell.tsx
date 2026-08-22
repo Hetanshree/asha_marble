@@ -11,6 +11,10 @@ import { Spinner } from "./ui";
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", exact: true },
   { href: "/admin/products", label: "Products", exact: false },
+  { href: "/admin/team", label: "Our Team", exact: false },
+  { href: "/admin/hand-carving", label: "Hand Carving Page", exact: true },
+  { href: "/admin/hand-carving/gallery", label: "Carving Gallery", exact: false },
+  { href: "/admin/hand-carving/products", label: "Carving Products", exact: false },
   { href: "/admin/homepage", label: "Homepage", exact: true },
   { href: "/admin/about", label: "About Page", exact: true },
   { href: "/admin/contact", label: "Contact Page", exact: true },

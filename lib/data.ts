@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Signature golden-yellow marble with natural veining, sourced directly from Jaisalmer quarries.",
     description: "Our Jaisalmer Yellow Marble is quarried from the ancient golden limestone formations of Rajasthan. Each slab carries warm golden hues and distinctive natural veining that make this stone a preferred choice for luxury interiors, heritage restorations, and premium architectural projects. Available in polished, honed, and brushed finishes. Suitable for flooring, wall cladding, countertops, and decorative features.",
     images: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png",
       "https://images.unsplash.com/photo-1615971677499-5467cbab01b0?w=800&q=80",
     ],
     finish: ["Polished", "Honed", "Brushed"],
@@ -173,7 +173,7 @@ export const PRODUCTS: Product[] = [
     description: "Our sandstone cobbles and pavers combine the natural beauty of Jaisalmer stone with practical durability. Perfect for driveways, garden pathways, courtyards, and pool surrounds. Available in multiple sizes and natural finishes that provide grip and aesthetic appeal. Resistant to weathering and heavy foot traffic.",
     images: [
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png",
     ],
     finish: ["Natural", "Rough", "Tumbled"],
     availability: "available",
@@ -258,12 +258,12 @@ export const SITE = {
   // or set up live Google Places API sync for automatic updates)
   rating: "4.8",
   reviews: "11",
-  founded: "2005",
+  founded: "2003",
 };
 
 export const HERO_SLIDES = [
   {
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=85",
+    image: "https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png",
     eyebrow: "Jaisalmer Yellow Marble",
     headline: "The Golden Stone\nof Rajasthan",
     sub: "Premium marble and natural stone, direct from source.",
@@ -308,15 +308,23 @@ export const TESTIMONIALS = [
   },
 ];
 
+// Uploaded to Cloudinary (asha-marble folder) — public/uploads is a gitignored
+// local-dev-only folder and isn't available once the site is deployed, so
+// gallery images must live on Cloudinary like every other content image.
 export const GALLERY_IMAGES = [
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-  "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80",
-  "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80",
-  "https://images.unsplash.com/photo-1605379399642-870262d3d051?w=600&q=80",
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80",
-  "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80",
-  "https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80",
-  "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904452/asha-marble/ikxwdgmvokarordgqtqv.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904453/asha-marble/fnewmedz6apknmknsshq.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904454/asha-marble/darlxjtcdjiihyl9thby.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904455/asha-marble/gnsxpnvnwf2vrmunvjgp.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904456/asha-marble/shoo0ipwdqittrfc2oq3.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904457/asha-marble/mzqvxupfcxmhyeqr9tif.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904458/asha-marble/wbsvqq7e8ohfox23d7bt.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904459/asha-marble/bwylr4dxzteayz6larwo.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904460/asha-marble/hc5mthmteogephsywtpb.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904461/asha-marble/zg8ok814fxzocr8o73un.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904462/asha-marble/m4ed7ohnadxlfz7qt0ud.jpg",
+  "https://res.cloudinary.com/uycfz4al/image/upload/v1786904463/asha-marble/wb4gubdv2aeubd6hve9u.jpg",
 ];
 
 export const FAQS = [

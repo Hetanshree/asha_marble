@@ -58,6 +58,16 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   return <span ref={ref}>{n}{suffix}</span>;
 }
 
+/* Fine fractal-noise grain, tinted warm gold — gives the textured hero a tactile,
+   stone-like surface instead of a flat color. Generated in CSS, no image asset. */
+const HERO_GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014 0.08' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.78 0 0 0 0 0.67 0 0 0 0 0.45 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
+/* A faint stone-jali lattice motif — nods to the brand's carved-stone craft
+   without needing a photo. */
+const HERO_JALI =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpattern id='p' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Cpath d='M30 2 L58 30 L30 58 L2 30 Z' fill='none' stroke='%23C8A96E' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%23C8A96E' stroke-width='1'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E\")";
+
 /* ─── Hero Slider ────────────────────────────────── */
 function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideData[]; phone: string; phoneRaw: string; whatsapp: string }) {
   const [cur, setCur] = useState(0);
@@ -80,36 +90,36 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
   const slide = slides[cur];
 
   return (
-    <section style={{ position: "relative", minHeight: "max(580px, calc(100vh - 68px))", overflow: "hidden", background: "var(--color-charcoal)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-      {/* Bg images */}
-      {slides.map((s, i) => (
-        <div key={i} style={{
-          position: "absolute", inset: 0,
-          opacity: i === cur ? 1 : 0,
-          transition: "opacity 0.9s ease",
-        }}>
-          <Image src={s.image} alt={s.eyebrow} fill className="object-cover" priority={i === 0} unoptimized />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(28,26,22,0.88) 45%, rgba(28,26,22,0.4) 100%)" }} />
-        </div>
-      ))}
+    <section className="hero-section" style={{ position: "relative", overflow: "hidden", background: "radial-gradient(130% 150% at 14% 18%, #2a261f 0%, #1c1a16 55%, #131210 100%)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      {/* Textured backdrop — no photography, built entirely from CSS/SVG layers:
+          soft drifting gold veins, fine stone-grain noise, a faint jali lattice
+          motif, and an edge vignette. Shared across slides; only the copy changes. */}
+      <div className="hero-veins" aria-hidden style={{ position: "absolute", inset: "-10%", zIndex: 0 }} />
+      <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: HERO_GRAIN, backgroundSize: "320px 320px", mixBlendMode: "overlay", opacity: 0.5 }} />
+      <div aria-hidden className="hero-jali" style={{ position: "absolute", top: 0, right: 0, bottom: 0, width: "48%", zIndex: 1, backgroundImage: HERO_JALI, backgroundSize: "90px 90px", opacity: 0.5, WebkitMaskImage: "radial-gradient(ellipse 90% 90% at 100% 40%, #000 0%, transparent 72%)", maskImage: "radial-gradient(ellipse 90% 90% at 100% 40%, #000 0%, transparent 72%)" }} />
+      <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 1, background: "radial-gradient(120% 120% at 50% 50%, transparent 45%, rgba(10,9,7,0.55) 100%)" }} />
+
+      {/* Fine gold frame line — premium editorial touch */}
+      <div style={{ position: "absolute", inset: 16, border: "1px solid rgba(200,169,110,0.25)", zIndex: 2, pointerEvents: "none" }} className="hero-frame" />
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1280, margin: "0 auto", padding: "40px 0" }} className="hero-content">
-        <div className="label-with-line" style={{ marginBottom: 20 }}>
+      <div key={cur} style={{ position: "relative", zIndex: 3, width: "100%", maxWidth: 1280, margin: "0 auto", paddingTop: 48 }} className="hero-content">
+        <div className="label-with-line hero-anim" style={{ marginBottom: 24, animationDelay: "0.05s" }}>
           <span className="label">{slide.eyebrow}</span>
         </div>
-        <h1 style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5.5vw, 80px)",
-          fontWeight: 300, color: "#fff", lineHeight: 1.15,
-          marginBottom: 24, marginTop: 4, maxWidth: 900,
-          whiteSpace: "pre-line",
+        <h1 className="hero-anim" style={{
+          fontFamily: "var(--font-display)", fontSize: "clamp(34px, 6vw, 120px)",
+          fontWeight: 300, color: "#fff", lineHeight: 1.18,
+          marginBottom: 22, marginTop: 4, maxWidth: 1100,
+          whiteSpace: "pre-line", textShadow: "0 2px 24px rgba(0,0,0,0.35)",
+          animationDelay: "0.14s",
         }}>
           {slide.headline}
         </h1>
-        <p style={{ color: "rgba(212,201,176,0.8)", fontSize: 15, maxWidth: 440, lineHeight: 1.7, marginBottom: 40 }}>
+        <p className="hero-anim" style={{ color: "rgba(212,201,176,0.82)", fontSize: 15, maxWidth: 440, lineHeight: 1.7, marginBottom: 32, animationDelay: "0.24s" }}>
           {slide.sub}
         </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+        <div className="hero-anim" style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", marginBottom: 36, animationDelay: "0.32s" }}>
           {slide.ctaHref && (
             <Link href={slide.ctaHref} className="btn-gold">{slide.ctaLabel || "Explore"} <ArrowRight size={14} /></Link>
           )}
@@ -120,41 +130,117 @@ function HeroSlider({ slides, phone, phoneRaw, whatsapp }: { slides: HeroSlideDa
             <Phone size={14} /> {phone}
           </a>
         </div>
+        {/* Trust strip — quiet proof points for a premium first impression */}
+        <div className="hero-anim" style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", animationDelay: "0.4s" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", gap: 1 }}>
+              {Array(5).fill(0).map((_, j) => <Star key={j} size={12} fill="var(--color-gold)" color="var(--color-gold)" />)}
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 12, fontWeight: 600 }}>{SITE.rating}/5</span>
+          </div>
+          <span style={{ width: 1, height: 14, background: "rgba(255,255,255,0.2)" }} />
+          <span style={{ color: "rgba(212,201,176,0.75)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            Trusted Since {SITE.founded}
+          </span>
+        </div>
       </div>
 
       {/* Slide counter + nav */}
       {total > 1 && (
-        <div style={{ position: "absolute", bottom: 32, zIndex: 3, display: "flex", alignItems: "center", gap: 16 }} className="hero-nav-controls">
-          <button onClick={() => go(cur - 1)} style={{ width: 40, height: 40, border: "1px solid rgba(255,255,255,0.3)", background: "transparent", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color 0.2s" }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}>
+        <div style={{ position: "absolute", bottom: 32, zIndex: 3, display: "flex", alignItems: "center", gap: 18 }} className="hero-nav-controls">
+          <button aria-label="Previous slide" onClick={() => go(cur - 1)} className="hero-nav-btn">
             <ChevronLeft size={16} />
           </button>
-          <span style={{ color: "var(--color-limestone)", fontSize: 11, letterSpacing: "0.1em" }}>
-            {String(cur + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          <span style={{ color: "var(--color-limestone)", fontSize: 11, letterSpacing: "0.14em", fontVariantNumeric: "tabular-nums" }}>
+            {String(cur + 1).padStart(2, "0")} <span style={{ opacity: 0.4 }}>/ {String(total).padStart(2, "0")}</span>
           </span>
-          <button onClick={() => go(cur + 1)} style={{ width: 40, height: 40, border: "1px solid rgba(255,255,255,0.3)", background: "transparent", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color 0.2s" }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}>
+          <button aria-label="Next slide" onClick={() => go(cur + 1)} className="hero-nav-btn">
             <ChevronRight size={16} />
           </button>
         </div>
       )}
 
-      {/* Dots */}
+      {/* Dots with autoplay progress fill */}
       {total > 1 && (
-        <div style={{ position: "absolute", bottom: 42, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8, zIndex: 3 }}>
+        <div style={{ position: "absolute", bottom: 44, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8, zIndex: 3 }}>
           {slides.map((_, i) => (
-            <button key={i} onClick={() => go(i)} style={{ width: i === cur ? 24 : 8, height: 8, background: i === cur ? "var(--color-gold)" : "rgba(255,255,255,0.3)", border: "none", cursor: "pointer", transition: "width 0.3s, background 0.3s", borderRadius: 4 }} />
+            <button key={i} onClick={() => go(i)} aria-label={`Go to slide ${i + 1}`} className="hero-dot" style={{ width: i === cur ? 32 : 8 }}>
+              {i === cur && <span key={cur} className="hero-dot-fill" />}
+            </button>
           ))}
         </div>
       )}
       <style>{`
-        .hero-content { padding: 0 48px; }
+        /* Height comes from the content + its padding, exactly like the CTA banner —
+           not a fixed 100vh box. That's what lets it grow taller on narrow screens
+           (more wrapped text = more height needed) instead of forcing a tall,
+           narrow crop onto the cover image. */
+        .hero-section { min-height: 680px; }
+        .hero-content { padding-left: 48px; padding-right: 48px; padding-bottom: 64px; }
         .hero-nav-controls { right: 48px; }
+        .hero-frame { display: none; }
+        @media (min-width: 900px) {
+          .hero-frame { display: block; }
+        }
+        @media (max-width: 900px) {
+          .hero-jali { width: 70%; opacity: 0.7; }
+        }
+
+        /* Soft gold vein blobs, slowly drifting — the "living stone" ambient motion */
+        .hero-veins {
+          background:
+            radial-gradient(38% 46% at 82% 20%, rgba(200,169,110,0.16) 0%, transparent 70%),
+            radial-gradient(30% 40% at 12% 78%, rgba(223,194,138,0.12) 0%, transparent 72%),
+            radial-gradient(45% 30% at 60% 95%, rgba(168,134,78,0.10) 0%, transparent 75%);
+          filter: blur(6px);
+          animation: heroVeinDrift 26s ease-in-out infinite alternate;
+        }
+        @keyframes heroVeinDrift {
+          0% { transform: translate(0,0) scale(1); }
+          100% { transform: translate(-2%, 2.5%) scale(1.06); }
+        }
+
+        /* Staggered fade-up entrance for hero copy, replayed on every slide change via key={cur} */
+        .hero-anim { opacity: 0; transform: translateY(18px); animation: heroFadeUp 0.85s cubic-bezier(.16,1,.3,1) forwards; }
+        @keyframes heroFadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        .hero-nav-btn {
+          width: 42px; height: 42px; border-radius: 999px;
+          border: 1px solid rgba(255,255,255,0.28);
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(6px);
+          color: #fff; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
+        }
+        .hero-nav-btn:hover { border-color: var(--color-gold); background: var(--color-gold); color: var(--color-charcoal); transform: scale(1.06); }
+
+        .hero-dot {
+          height: 4px; padding: 0; border: none; cursor: pointer; border-radius: 3px;
+          background: rgba(255,255,255,0.28);
+          overflow: hidden; position: relative;
+          transition: width 0.4s ease, background 0.4s ease;
+        }
+        .hero-dot-fill {
+          position: absolute; inset: 0; transform-origin: left;
+          background: var(--color-gold);
+          animation: heroDotFill 5.5s linear forwards;
+        }
+        @keyframes heroDotFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+        @media (max-width: 900px) {
+          .hero-section { min-height: 560px; }
+        }
         @media (max-width: 640px) {
-          .hero-content { padding: 0 20px; }
+          /* Mobile: drop the fixed floor entirely so the section is purely
+             content + padding sized, exactly like the CTA banner. paddingTop
+             stays inline (48px) — only left/right/bottom are overridden here. */
+          .hero-section { min-height: 0; }
+          .hero-content { padding-left: 24px; padding-right: 24px; padding-bottom: 92px; }
           .hero-nav-controls { right: 20px; bottom: 20px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-veins, .hero-anim, .hero-dot-fill { animation: none !important; transition: none !important; transform: none !important; opacity: 1 !important; }
         }
       `}</style>
     </section>
@@ -184,16 +270,15 @@ function CompanySection() {
     <section ref={ref} style={{ background: "var(--color-charcoal)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid" }} className="company-grid">
         {/* Image */}
-        <div style={{ position: "relative", minHeight: 500 }}>
-          <Image src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Jaisalmer Yellow Marble quarry" fill className="object-cover" unoptimized />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent, rgba(28,26,22,0.5))" }} />
+        <div className="company-img" style={{ position: "relative", background: "var(--color-charcoal-light)" }}>
+          <Image src="/hero-craftsman.jpeg" alt="Asha Marble craftsmanship" fill className="object-contain" unoptimized />
         </div>
         {/* Text */}
-        <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}
-          className={`reveal ${vis ? "visible" : ""}`}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 0 }}
+          className={`reveal company-text ${vis ? "visible" : ""}`}>
           <div className="label-with-line" style={{ marginBottom: 16 }}><span className="label">The Company</span></div>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,3.5vw,52px)", fontWeight: 300, color: "#fff", lineHeight: 1.15, marginBottom: 20 }}>
-            Ahmedabad&apos;s Most Trusted<br />
+            India&apos;s Most Trusted<br />
             <span style={{ color: "var(--color-gold)", fontStyle: "italic" }}>Stone Supplier Since {SITE.founded}</span>
           </h2>
           <div className="gold-line" />
@@ -203,11 +288,11 @@ function CompanySection() {
           <p style={{ color: "rgba(212,201,176,0.75)", fontSize: 14, lineHeight: 1.9, marginBottom: 32 }}>
             Today, operating as manufacturer, supplier, wholesaler, and exporter, we combine ancient Rajasthani stone-crafting traditions with modern processing and a nationwide distribution network.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 36 }}>
-            {[["Manufacturer", "Direct from Jaisalmer quarries"], ["Wholesaler", "Bulk pricing for contractors"], ["Exporter", "UAE, UK, USA & beyond"], [`${SITE.rating}★ Rating`, `${SITE.reviews}+ verified reviews`]].map(([t, d]) => (
-              <div key={t}>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, color: "var(--color-gold)", marginBottom: 4 }}>{t}</div>
-                <div style={{ fontSize: 11, color: "rgba(212,201,176,0.55)", letterSpacing: "0.04em" }}>{d}</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: 24, marginBottom: 36 }} className="company-stats">
+            {[["Manufacturer", "Direct from Jaisalmer quarries"], ["Wholesaler", "Bulk pricing for contractors"], ["Exporter", "UAE, UK, USA & beyond"]].map(([t, d]) => (
+              <div key={t} style={{ minWidth: 0 }}>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, color: "var(--color-gold)", marginBottom: 4, overflowWrap: "break-word" }}>{t}</div>
+                <div style={{ fontSize: 11, color: "rgba(212,201,176,0.55)", letterSpacing: "0.04em", overflowWrap: "break-word" }}>{d}</div>
               </div>
             ))}
           </div>
@@ -218,8 +303,18 @@ function CompanySection() {
       </div>
       <style>{`
         .company-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
-        @media(max-width:768px){.company-grid{grid-template-columns:minmax(0,1fr);}}
-        .company-grid > div:first-child { min-height: 320px; }
+        .company-img { align-self: center; height: 460px; }
+        .company-text { padding: 80px 60px; }
+        @media(max-width:768px){
+          .company-grid{grid-template-columns:minmax(0,1fr);}
+          .company-img{ height: 420px; }
+          .company-text{padding:56px 32px;}
+        }
+        @media(max-width:480px){
+          .company-img{ height: 360px; }
+          .company-text{padding:40px 20px;}
+          .company-stats{ grid-template-columns: minmax(0,1fr) !important; }
+        }
       `}</style>
     </section>
   );
@@ -245,7 +340,7 @@ function FeaturedProducts({ featured }: { featured: FeaturedProductData[] }) {
           </Link>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px,100%),1fr))", gap: 24 }}>
           {featured.map((p, i) => (
             <Link key={p._id} href={`/products/${p.slug}`}
               className="product-card"
@@ -254,8 +349,8 @@ function FeaturedProducts({ featured }: { featured: FeaturedProductData[] }) {
                 opacity: vis ? 1 : 0, transform: vis ? "none" : "translateY(24px)",
                 transition: `opacity 0.6s ${i * 90}ms, transform 0.6s ${i * 90}ms`,
               }}>
-              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative" }}>
-                <Image src={p.images[0]} alt={p.name} fill className="object-cover" unoptimized />
+              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative", background: "var(--color-cream-dark)" }}>
+                <Image src={p.images[0]} alt={p.name} fill className="object-contain" unoptimized />
                 {/* Category badge */}
                 <div style={{ position: "absolute", top: 12, left: 12, background: "rgba(28,26,22,0.82)", backdropFilter: "blur(4px)", padding: "4px 10px" }}>
                   <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-gold)" }}>{p.category}</span>
@@ -330,7 +425,7 @@ function TestimonialsSection() {
             An outpour of appreciation for our promise of excellence.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px,100%),1fr))", gap: 24 }}>
           {TESTIMONIALS.map((t, i) => (
             <div key={i} style={{
               background: "#fff", border: "1px solid var(--color-limestone)",

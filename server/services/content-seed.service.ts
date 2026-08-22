@@ -41,7 +41,7 @@ export async function ensureInitialContent(): Promise<void> {
       mission: "",
       vision: "",
       experience: `${yearsActive}+`,
-      images: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"],
+      images: ["https://res.cloudinary.com/uycfz4al/image/upload/v1786904451/asha-marble/cbqjhmw598la2zmmo9nq.png"],
       cloudinaryPublicIds: [""],
     });
     console.log("[seed] About content migrated from static data");

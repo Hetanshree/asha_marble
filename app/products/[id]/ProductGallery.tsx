@@ -7,8 +7,8 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
 
   return (
     <div>
-      <div style={{ aspectRatio: "4/3", position: "relative", marginBottom: 12, overflow: "hidden" }}>
-        <Image src={images[active]} alt={name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
+      <div style={{ aspectRatio: "4/3", position: "relative", marginBottom: 12, overflow: "hidden", background: "var(--color-cream-dark)" }}>
+        <Image src={images[active]} alt={name} fill className="object-contain" sizes="(max-width: 768px) 100vw, 50vw" priority />
       </div>
       {images.length > 1 && (
         <div style={{ display: "grid", gridTemplateColumns: `repeat(${images.length}, 1fr)`, gap: 8 }}>
@@ -19,9 +19,9 @@ export default function ProductGallery({ images, name }: { images: string[]; nam
               style={{
                 aspectRatio: "1/1", position: "relative", overflow: "hidden",
                 border: active === i ? "2px solid var(--color-gold)" : "2px solid var(--color-limestone)",
-                padding: 0, cursor: "pointer", background: "none", transition: "border-color 0.2s",
+                padding: 0, cursor: "pointer", background: "var(--color-cream-dark)", transition: "border-color 0.2s",
               }}>
-              <Image src={img} alt={`${name} ${i + 1}`} fill className="object-cover" sizes="120px" />
+              <Image src={img} alt={`${name} ${i + 1}`} fill className="object-contain" sizes="120px" />
               {active === i && (
                 <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 0 2px var(--color-gold)" }} />
               )}

@@ -83,13 +83,13 @@ function ProductsContent({ products, categories }: { products: ProductListItem[]
         </div>
 
         {/* Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px,100%),1fr))", gap: 24 }}>
           {filtered.map(p => (
             <Link key={p.slug} href={`/products/${p.slug}`}
               className="product-card"
               style={{ display: "block", background: "#fff", border: "1px solid var(--color-limestone)" }}>
-              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative" }}>
-                <Image src={p.images[0]} alt={p.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 280px" />
+              <div className="card-img" style={{ aspectRatio: "4/3", position: "relative", background: "var(--color-cream-dark)" }}>
+                <Image src={p.images[0]} alt={p.name} fill className="object-contain" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 280px" />
                 <div style={{ position: "absolute", top: 12, left: 12, background: "rgba(28,26,22,0.82)", padding: "4px 10px" }}>
                   <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-gold)" }}>{p.category}</span>
                 </div>

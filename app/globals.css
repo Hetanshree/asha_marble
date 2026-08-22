@@ -30,7 +30,8 @@
 
 /* ── Reset ─────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-color: transparent; }
+html, body { max-width: 100%; overflow-x: hidden; }
 body {
   font-family: var(--font-sans);
   background-color: var(--color-cream);
@@ -42,10 +43,13 @@ img { display: block; max-width: 100%; }
 a { text-decoration: none; color: inherit; }
 
 /* ── Scrollbar ──────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-cream-dark); }
+::-webkit-scrollbar { width: 0px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-track-piece { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
-::selection { background: var(--color-gold); color: var(--color-charcoal); }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+::-webkit-scrollbar-corner { background: transparent; }
+::selection { background: transparent; }
 
 /* ── Typography helpers ─────────────────── */
 .font-display { font-family: var(--font-display); }
@@ -142,6 +146,11 @@ a { text-decoration: none; color: inherit; }
 .product-card .card-img { overflow: hidden; }
 .product-card .card-img img { transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
 .product-card:hover .card-img img { transform: scale(1.06); }
+
+/* ── Team card (no image zoom on hover) ── */
+.team-card { transition: transform 0.35s cubic-bezier(.4,0,.2,1); }
+.team-card:hover { transform: translateY(-5px); }
+.team-card .card-img { overflow: hidden; }
 
 /* ── Hero slider ────────────────────────── */
 .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }

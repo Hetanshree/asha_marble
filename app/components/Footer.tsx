@@ -36,7 +36,7 @@ export default function Footer() {
   return (
     <footer style={{ background: "var(--color-charcoal)", color: "var(--color-limestone)" }}>
       {/* Main */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "72px 24px 48px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 48 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "72px 24px 48px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(220px,100%),1fr))", gap: 48 }}>
         {/* Brand */}
         <div>
           <div style={{ width: 88, height: 88, borderRadius: "8px", overflow: "hidden", background: "#fff", padding: 4, marginBottom: 16 }}>
@@ -61,7 +61,9 @@ export default function Footer() {
             {[
               { href: "/", label: "Home" },
               { href: "/products", label: "All Products" },
+              { href: "/hand-carving", label: "Explore Hand Carving" },
               { href: "/about", label: "About Us" },
+              { href: "/team", label: "Our Team" },
               { href: "/contact", label: "Contact Us" },
               { href: "/#gallery", label: "Gallery" },
               { href: "/#faq", label: "FAQs" },
@@ -117,7 +119,7 @@ export default function Footer() {
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <p style={{ fontSize: 11, color: "rgba(212,201,176,0.4)" }}>
-            Ahmedabad, Gujarat · India
+            Jaisalmer, Rajasthan · India
           </p>
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             style={{

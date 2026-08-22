@@ -17,12 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Asha Marble &amp; Art Work | Jaisalmer Yellow Marble Supplier Ahmedabad</title>
-        <meta name="description" content="Leading manufacturer, supplier, wholesaler &amp; exporter of Jaisalmer Yellow Marble, Sandstone, Stone Jali &amp; Carved Stone Work. Ahmedabad, Gujarat." />
-        <meta name="keywords" content="Jaisalmer Yellow Marble, Jaisalmer Yellow Sandstone, marble supplier Ahmedabad, natural stone Gujarat, wall cladding, stone jali, marble manufacturer India, marble exporter" />
+        <title>Asha Marble &amp; Art Work | Jaisalmer Yellow Marble Supplier, Rajasthan</title>
+        <meta name="description" content="Leading manufacturer, supplier, wholesaler &amp; exporter of Jaisalmer Yellow Marble, Sandstone, Stone Jali &amp; Carved Stone Work. Jaisalmer, Rajasthan." />
+        <meta name="keywords" content="Jaisalmer Yellow Marble, Jaisalmer Yellow Sandstone, marble supplier Jaisalmer, natural stone Rajasthan, wall cladding, stone jali, marble manufacturer India, marble exporter" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Asha Marble &amp; Art Work | Premium Jaisalmer Yellow Marble" />
-        <meta property="og:description" content="Manufacturer, supplier &amp; exporter of premium Jaisalmer Yellow Marble and natural stone from Ahmedabad, Gujarat." />
+        <meta property="og:description" content="Manufacturer, supplier &amp; exporter of premium Jaisalmer Yellow Marble and natural stone from Jaisalmer, Rajasthan." />
         <meta name="robots" content="index, follow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

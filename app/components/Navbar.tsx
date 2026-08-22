@@ -9,7 +9,9 @@ import { SITE } from "@/lib/data";
 const NAV = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
+  { label: "Hand Carving", href: "/hand-carving" },
   { label: "About", href: "/about" },
+  { label: "Our Team", href: "/team" },
   { label: "Gallery", href: "/#gallery" },
   { label: "Contact", href: "/contact" },
 ];
