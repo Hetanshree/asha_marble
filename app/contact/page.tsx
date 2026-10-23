@@ -5,8 +5,9 @@ import ContactClient from "./ContactClient";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Contact Us | Asha Marble & Art Work",
-  description: "Get in touch with Asha Marble & Art Work for premium Jaisalmer Yellow Marble, sandstone, and natural stone products.",
+  title: "Contact Us — Jaisalmer Marble Price & Enquiry",
+  description: "Contact Asha Marble & Art Work for Jaisalmer Yellow Marble prices, samples and bulk orders. Call, WhatsApp or visit our office.",
+  alternates: { canonical: "/contact" },
 };
 
 export default async function ContactPage() {

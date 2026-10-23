@@ -1,4 +1,6 @@
 import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
+
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", allow: "/", disallow: "/admin/" }, sitemap: "https://ashamarble.com/sitemap.xml" };
+  return { rules: { userAgent: "*", allow: "/", disallow: ["/admin/", "/api/"] }, sitemap: `${SITE_URL}/sitemap.xml` };
 }

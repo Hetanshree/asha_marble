@@ -271,7 +271,7 @@ function CompanySection() {
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid" }} className="company-grid">
         {/* Image */}
         <div className="company-img" style={{ position: "relative", background: "var(--color-charcoal-light)" }}>
-          <Image src="/hero-craftsman.jpeg" alt="Asha Marble craftsmanship" fill className="object-contain" unoptimized />
+          <Image src="/hero-craftsman.jpeg" alt="Artisan carving Jaisalmer yellow stone at Asha Marble" fill className="object-contain" unoptimized />
         </div>
         {/* Text */}
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 0 }}
@@ -478,7 +478,7 @@ function GallerySection() {
                 opacity: vis ? 1 : 0,
                 transition: `opacity 0.5s ${i * 60}ms`,
               }}>
-              <Image src={img} alt={`Gallery ${i + 1}`} fill className="object-cover"
+              <Image src={img} alt={`Jaisalmer yellow marble and stone work project ${i + 1}`} fill className="object-cover"
                 style={{ transition: "transform 0.5s ease" }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")}
@@ -499,7 +499,7 @@ function GallerySection() {
 function CTABanner({ phone, phoneRaw, whatsapp }: { phone: string; phoneRaw: string; whatsapp: string }) {
   return (
     <section style={{ position: "relative", padding: "100px 0", overflow: "hidden" }}>
-      <Image src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&q=80" alt="Premium stone architecture" fill className="object-cover" unoptimized />
+      <Image src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&q=80" alt="Building finished in Jaisalmer yellow stone cladding" fill className="object-cover" unoptimized />
       <div style={{ position: "absolute", inset: 0, background: "rgba(28,26,22,0.82)" }} />
       <div style={{ position: "relative", zIndex: 2, textAlign: "center", maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
         <div className="label-with-line" style={{ justifyContent: "center", marginBottom: 16 }}><span className="label">Ready to Begin?</span></div>

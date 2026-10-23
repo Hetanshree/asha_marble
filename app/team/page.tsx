@@ -7,7 +7,8 @@ import { teamListQuerySchema } from "@/server/validation/team.validation";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Our Team | Asha Marble & Art Work",
+  title: "Our Team",
+  alternates: { canonical: "/team" },
   description:
     "Meet the craftsmen, artisans, and leadership behind Asha Marble & Art Work's Jaisalmer Yellow Marble and natural stone work.",
 };

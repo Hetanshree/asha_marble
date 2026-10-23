@@ -6,7 +6,8 @@ import HandCarvingClient from "./HandCarvingClient";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Explore Hand Carving | Asha Marble & Art Work",
+  title: "Hand-Carved Marble & Jaisalmer Stone Carving",
+  alternates: { canonical: "/hand-carving" },
   description:
     "Discover the beauty of handcrafted artistry, detailed craftsmanship, and timeless designs — hand-carved marble and stone work by Asha Marble & Art Work.",
 };

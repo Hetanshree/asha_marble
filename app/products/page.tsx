@@ -6,8 +6,9 @@ import ProductsClient, { type ProductListItem } from "./ProductsClient";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Products | Asha Marble & Art Work",
-  description: "Browse our full collection of Jaisalmer Yellow Marble, sandstone, wall cladding, stone jali, and carved stone work.",
+  title: "Jaisalmer Yellow Marble, Sandstone & Stone Products",
+  description: "Browse Jaisalmer Yellow Marble slabs & tiles, Jaisalmer yellow sandstone, wall cladding, stone jali and carved stone work. Get prices and quotes directly from the supplier.",
+  alternates: { canonical: "/products" },
 };
 
 export default async function ProductsPage() {

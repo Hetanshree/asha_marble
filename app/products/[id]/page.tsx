@@ -8,6 +8,7 @@ import { productListQuerySchema } from "@/server/validation/product.validation";
 import { ApiError } from "@/server/utils/ApiError";
 import { formatPrice } from "@/lib/data";
 import ProductGallery from "./ProductGallery";
+import { SITE_URL, jsonLd } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   try {
     const p = await getProductByIdOrSlug(id, { publicOnly: true });
-    return { title: `${p.name} | Asha Marble & Art Work`, description: p.shortDescription };
+    return {
+      title: p.name,
+      description: p.shortDescription,
+      alternates: { canonical: `/products/${p.slug}` },
+      openGraph: { title: p.name, description: p.shortDescription, url: `/products/${p.slug}`, images: p.images.slice(0, 1) },
+    };
   } catch {
     return {};
   }
@@ -49,8 +55,31 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
   };
   const av = availMap[p.availability as keyof typeof availMap] ?? availMap.available;
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.name,
+    description: p.shortDescription || p.description,
+    image: p.images,
+    category: p.category,
+    url: `${SITE_URL}/products/${p.slug}`,
+    brand: { "@type": "Brand", name: "Asha Marble & Art Work" },
+    manufacturer: { "@id": `${SITE_URL}/#business` },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Products", item: `${SITE_URL}/products` },
+      { "@type": "ListItem", position: 3, name: p.name, item: `${SITE_URL}/products/${p.slug}` },
+    ],
+  };
+
   return (
     <div style={{ minHeight: "100vh", background: "var(--color-cream)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(productJsonLd)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd)} />
       {/* Breadcrumb */}
       <div style={{ background: "var(--color-charcoal)", padding: "20px 0" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", gap: 8, fontSize: 11, color: "rgba(212,201,176,0.5)", letterSpacing: "0.08em", textTransform: "uppercase" }}>

@@ -6,7 +6,8 @@ import { getAbout } from "@/server/services/about.service";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "About Us | Asha Marble & Art Work",
+  title: "About Us — Jaisalmer Yellow Marble Manufacturer & Exporter",
+  alternates: { canonical: "/about" },
   description: "Learn about Asha Marble & Art Work — leading manufacturer, supplier and exporter of Jaisalmer Yellow Marble and natural stone from Ahmedabad, Gujarat since 2005.",
 };
 

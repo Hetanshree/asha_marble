@@ -5,6 +5,10 @@ import HomeClient, { type FeaturedProductData, type HeroSlideData } from "./Home
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default async function HomePage() {
   const [homepage, contact] = await Promise.all([getHomepage(), getContact()]);
 
