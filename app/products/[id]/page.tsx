@@ -8,7 +8,7 @@ import { productListQuerySchema } from "@/server/validation/product.validation";
 import { ApiError } from "@/server/utils/ApiError";
 import { formatPrice } from "@/lib/data";
 import ProductGallery from "./ProductGallery";
-import { SITE_URL, jsonLd } from "@/lib/seo";
+import { SITE_URL, jsonLd, plainText } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -16,11 +16,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   try {
     const p = await getProductByIdOrSlug(id, { publicOnly: true });
+    const description = plainText(p.shortDescription || p.description).slice(0, 300);
     return {
       title: p.name,
-      description: p.shortDescription,
+      description,
       alternates: { canonical: `/products/${p.slug}` },
-      openGraph: { title: p.name, description: p.shortDescription, url: `/products/${p.slug}`, images: p.images.slice(0, 1) },
+      openGraph: { title: p.name, description, url: `/products/${p.slug}`, images: p.images.slice(0, 1) },
     };
   } catch {
     return {};
@@ -59,7 +60,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
-    description: p.shortDescription || p.description,
+    description: plainText(p.shortDescription || p.description),
     image: p.images,
     category: p.category,
     url: `${SITE_URL}/products/${p.slug}`,
@@ -113,7 +114,10 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
 
             <div className="gold-line" />
 
-            <p style={{ fontSize: 14, color: "var(--color-charcoal)", lineHeight: 1.9, marginBottom: 24 }}>{p.description}</p>
+            <p style={{ fontSize: 14, color: "var(--color-charcoal)", lineHeight: 1.9, marginBottom: 24 }}>
+              {/* Admin text may use **bold**; render it instead of showing the asterisks. */}
+              {p.description.split("**").map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part))}
+            </p>
 
             {/* Features */}
             <div style={{ display: "grid", gap: 10, marginBottom: 32 }} className="form-row-2">

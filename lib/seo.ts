@@ -1,9 +1,18 @@
 import { SITE } from "./data";
 
 // Public URL of the live site. Set NEXT_PUBLIC_SITE_URL in production if the domain differs.
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://ashamarble.com").replace(/\/+$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://jaisalmeryellowmarble.com").replace(/\/+$/, "");
 
 export const DEFAULT_OG_IMAGE = "/logo.jpeg";
+
+// Strips markdown (**bold**, _italic_, # headings, links) so descriptions read cleanly in search results.
+export function plainText(text: string | undefined | null) {
+  return (text ?? "")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/[*_`#>]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 // Escapes "<" so JSON-LD can't break out of its <script> tag.
 export function jsonLd(data: unknown) {

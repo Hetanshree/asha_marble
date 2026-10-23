@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Phone, MessageCircle, Star, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 import { SITE, CATEGORIES, TESTIMONIALS, GALLERY_IMAGES, FAQS, formatPrice } from "@/lib/data";
+import { plainText } from "@/lib/seo";
 
 export type HeroSlideData = {
   eyebrow: string;
@@ -364,7 +365,7 @@ function FeaturedProducts({ featured }: { featured: FeaturedProductData[] }) {
               <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
                 <h3 style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 500, color: "var(--color-charcoal)", marginBottom: 6, lineHeight: 1.25, minHeight: "2.5em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.name}</h3>
                 <p style={{ fontSize: 12, color: "var(--color-umber)", lineHeight: 1.6, marginBottom: 14, minHeight: "3.2em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
-                  {p.shortDescription}
+                  {plainText(p.shortDescription)}
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid var(--color-limestone)", paddingTop: 14, marginTop: "auto" }}>
                   <div>
