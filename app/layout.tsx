@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import SiteChrome from "./components/SiteChrome";
-import { SITE_URL, DEFAULT_OG_IMAGE, jsonLd, localBusinessJsonLd } from "@/lib/seo";
+import { SITE_URL, DEFAULT_OG_IMAGE, GOOGLE_SITE_VERIFICATION, jsonLd, localBusinessJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  verification: GOOGLE_SITE_VERIFICATION ? { google: GOOGLE_SITE_VERIFICATION } : undefined,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

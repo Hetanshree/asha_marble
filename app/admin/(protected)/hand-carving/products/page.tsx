@@ -5,6 +5,7 @@ import Link from "next/link";
 import { api, ApiRequestError } from "../../../_lib/api";
 import type { HandCarvingProduct, Pagination } from "../../../_lib/types";
 import { Banner, Button, Card, Input, PageHeader, Spinner, Toggle } from "../../../_components/ui";
+import { formatPrice } from "@/lib/data";
 
 export default function HandCarvingProductsListPage() {
   const [products, setProducts] = useState<HandCarvingProduct[]>([]);
@@ -107,7 +108,7 @@ export default function HandCarvingProductsListPage() {
                     </td>
                     <td className="px-4 py-3 text-neutral-600">{product.category}</td>
                     <td className="px-4 py-3 text-neutral-600">
-                      {product.price} <span className="text-xs text-neutral-400">/ {product.unit}</span>
+                      {formatPrice(product.price)} <span className="text-xs text-neutral-400">/ {product.unit}</span>
                     </td>
                     <td className="px-4 py-3">{product.featured ? "★" : ""}</td>
                     <td className="px-4 py-3">

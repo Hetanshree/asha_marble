@@ -1,8 +1,8 @@
-/** Appends the "Rs" currency marker after a numeric price (e.g. "95" -> "95 Rs").
- *  Uses a non-breaking space so the number and "Rs" never wrap onto separate
- *  lines. Leaves non-numeric prices (e.g. "On Request") untouched. */
+/** Puts the ₹ sign before a numeric price (e.g. "95", "95 Rs", "Rs. 95" -> "₹95").
+ *  Leaves non-numeric prices (e.g. "On Request") untouched. */
 export function formatPrice(price: string): string {
-  return /^[\d,.]+$/.test(price.trim()) ? `${price} Rs` : price;
+  const amount = price.trim().replace(/^(₹|rs\.?|inr)\s*/i, "").replace(/\s*(₹|rs\.?|inr|\/-)$/i, "");
+  return /^[\d,.]+(\s*-\s*[\d,.]+)?$/.test(amount) ? `₹${amount}` : price;
 }
 
 export type Product = {

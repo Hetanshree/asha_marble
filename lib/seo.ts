@@ -3,6 +3,9 @@ import { SITE } from "./data";
 // Public URL of the live site. Set NEXT_PUBLIC_SITE_URL in production if the domain differs.
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://jaisalmeryellowmarble.com").replace(/\/+$/, "");
 
+// Google Search Console "HTML tag" verification code (only the content="..." value).
+export const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
+
 export const DEFAULT_OG_IMAGE = "/logo.jpeg";
 
 // Strips markdown (**bold**, _italic_, # headings, links) so descriptions read cleanly in search results.
